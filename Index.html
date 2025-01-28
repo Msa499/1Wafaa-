@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            animation: backgroundMove 10s ease infinite;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        @keyframes backgroundMove {
+            0% {
+                background: linear-gradient(to right, #00c6ff, #0072ff);
+            }
+            50% {
+                background: linear-gradient(to left, #00c6ff, #0072ff);
+            }
+            100% {
+                background: linear-gradient(to right, #00c6ff, #0072ff);
+            }
+        }
+
+        .form-container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            width: 400px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00c6ff;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .input-group input:focus {
+            border-color: #00c6ff;
+        }
+
+        .input-group .eye-icon {
+            position: absolute;
+            right: 10px;
+            top: 15px;
+            cursor: pointer;
+        }
+
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            width: 100%;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        .error-message {
+            color: red;
+            text-align: center;
+        }
+
+        .link {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .link a {
+            color: #00c6ff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h1>تسجيل الدخول</h1>
+        <form id="signUpForm">
+            <div class="input-group">
+                <label for="name">الاسم</label>
+                <input type="text" id="name" required>
+            </div>
+
+            <div class="input-group">
+                <label for="email">البريد الإلكتروني</label>
+                <input type="email" id="email" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">كلمة المرور</label>
+                <input type="password" id="password" required>
+                <span class="eye-icon" onclick="togglePasswordVisibility('password')">👁️</span>
+            </div>
+
+            <div class="input-group">
+                <label for="confirmPassword">تأكيد كلمة المرور</label>
+                <input type="password" id="confirmPassword" required>
+                <span class="eye-icon" onclick="togglePasswordVisibility('confirmPassword')">👁️</span>
+            </div>
+
+            <div class="input-group">
+                <label for="phone">رقم الهاتف</label>
+                <input type="tel" id="phone" required>
+            </div>
+
+            <div class="input-group">
+                <label for="address">العنوان</label>
+                <input type="text" id="address" required>
+            </div>
+
+            <button type="submit" class="btn">تسجيل الدخول</button>
+        </form>
+
+        <div class="link">
+            <p>لديك حساب؟ <a href="third.html">تسجيل الدخول هنا</a></p>
+        </div>
+
+        <div class="error-message" id="errorMessage"></div>
+    </div>
+
+    <script>
+        // Toggle password visibility
+        function togglePasswordVisibility(id) {
+            const passwordField = document.getElementById(id);
+            const type = passwordField.type === "password" ? "text" : "password";
+            passwordField.type = type;
+        }
+
+        // Form validation
+        document.getElementById("signUpForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+            const errorMessage = document.getElementById("errorMessage");
+
+            if (password !== confirmPassword) {
+                errorMessage.textContent = "كلمة المرور غير متطابقة!";
+                return;
+            }
+
+            // Save data to localStorage (just as an example)
+            localStorage.setItem("name", document.getElementById("name").value);
+            localStorage.setItem("email", document.getElementById("email").value);
+            localStorage.setItem("phone", document.getElementById("phone").value);
+            localStorage.setItem("address", document.getElementById("address").value);
+
+            // Redirect to second.html
+            window.location.href = "second.html";
+        });
+    </script>
+</body>
+</html>
