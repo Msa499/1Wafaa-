@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رحلات ترفيهية</title>
+    <style>
+        /* التنسيق العام */
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .trip-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .trip-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .trip-card img {
+            width: 150px;
+            height: 150px;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+
+        .trip-info {
+            flex: 1;
+        }
+
+        .trip-info h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .trip-info p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        .trip-info .rating {
+            color: #ffd700;
+            font-size: 18px;
+        }
+
+        .book-button {
+            background: #6a11cb;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .book-button:hover {
+            background: #2575fc;
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .search-bar input {
+            padding: 10px;
+            width: 300px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .search-bar button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: #2575fc;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .search-bar button:hover {
+            background: #6a11cb;
+        }
+
+        .filter-section {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .filter-section select {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .contact-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .contact-section p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .contact-section a {
+            color: #6a11cb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .contact-section a:hover {
+            text-decoration: underline;
+        }
+
+        .social-icons {
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            margin: 0 10px;
+            color: #fff;
+            font-size: 24px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #6a11cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>رحلات ترفيهية</h1>
+
+        <!-- شريط البحث -->
+        <div class="search-bar">
+            <input type="text" placeholder="ابحث عن رحلة...">
+            <button>بحث</button>
+        </div>
+
+        <!-- التصفية -->
+        <div class="filter-section">
+            <select>
+                <option value="">جميع الوجهات</option>
+                <option value="wadi-el-rayan">وادي الريان</option>
+                <option value="portsaid">بورسعيد</option>
+                <option value="alexandria">اسكندريه</option>
+            </select>
+            <select>
+                <option value="">جميع الفئات</option>
+                <option value="nature">طبيعية</option>
+                <option value="historical">تاريخية</option>
+                <option value="entertainment">ترفيهية</option>
+            </select>
+        </div>
+
+        <!-- عرض الرحلات -->
+        <div class="trip-card">
+            <img src="https://via.placeholder.com/150" alt="وادي الريان">
+            <div class="trip-info">
+                <h2>رحلة وادي الريان</h2>
+                <p>استمتع بجمال الطبيعة الخلابة في وادي الريان، مع شلالات المياه والمناظر الطبيعية الرائعة.</p>
+                <div class="rating">★★★★☆</div>
+                <a href="fourth.html"><button class="book-button">احجز الآن</button></a>
+            </div>
+        </div>
+
+        <div class="trip-card">
+            <img src="https://via.placeholder.com/150" alt="بورسعيد">
+            <div class="trip-info">
+                <h2>رحلة بورسعيد</h2>
+                <p>اكتشف تاريخ بورسعيد العريق واستمتع بشواطئها الجميلة ومطاعمها الشهيرة.</p>
+                <div class="rating">★★★★★</div>
+                <a href="fourth.html"><button class="book-button">احجز الآن</button></a>
+            </div>
+        </div>
+
+        <div class="trip-card">
+            <img src="https://via.placeholder.com/150" alt="اسكندريه">
+            <div class="trip-info">
+                <h2>رحلة اسكندريه</h2>
+                <p>عش أجمل الأوقات في عروس البحر المتوسط، مع زيارة المعالم التاريخية والشواطئ الساحرة.</p>
+                <div class="rating">★★★★☆</div>
+                <a href="fourth.html"><button class="book-button">احجز الآن</button></a>
+            </div>
+        </div>
+
+        <!-- قسم الاتصال -->
+        <div class="contact-section">
+            <h2>اتصل بنا</h2>
+            <p>للاستفسار عن الرحلات: <a href="tel:01208590223">01208590223</a></p>
+            <p>للشكاوى والمشاكل الفنية: <a href="tel:01229027250">01229027250</a></p>
+        </div>
+
+        <!-- تواصل اجتماعي -->
+        <div class="social-icons">
+            <a href="#" target="_blank">&#xf09a;</a> <!-- فيسبوك -->
+            <a href="#" target="_blank">&#xf16d;</a> <!-- إنستجرام -->
+            <a href="#" target="_blank">&#xf099;</a> <!-- تويتر -->
+        </div>
+    </div>
+</body>
+</html>
