@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up Page</title>
+    <title>تسجيل الدخول</title>
     <style>
+        /* التنسيق العام */
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #00c6ff, #0072ff);
-            animation: backgroundMove 10s ease infinite;
-            color: white;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -17,162 +17,147 @@
             margin: 0;
         }
 
-        @keyframes backgroundMove {
-            0% {
-                background: linear-gradient(to right, #00c6ff, #0072ff);
-            }
-            50% {
-                background: linear-gradient(to left, #00c6ff, #0072ff);
-            }
-            100% {
-                background: linear-gradient(to right, #00c6ff, #0072ff);
-            }
-        }
-
-        .form-container {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 30px;
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            width: 400px;
-        }
-
-        h1 {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 300px;
             text-align: center;
-            color: #00c6ff;
+            animation: fadeIn 1s ease-in-out;
         }
 
-        .input-group {
-            margin-bottom: 15px;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .input-group input {
+        h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        input {
             width: 100%;
             padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-
-        .input-group input:focus {
-            border-color: #00c6ff;
-        }
-
-        .input-group .eye-icon {
-            position: absolute;
-            right: 10px;
-            top: 15px;
-            cursor: pointer;
-        }
-
-        .btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
+            margin: 10px 0;
             border: none;
-            width: 100%;
-            font-size: 18px;
-            cursor: pointer;
             border-radius: 5px;
+            background: rgba(255, 255, 255, 0.8);
+            color: #333;
         }
 
-        .btn:hover {
-            background-color: #45a049;
+        input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 1);
         }
 
-        .error-message {
-            color: red;
-            text-align: center;
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #2575fc;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
         }
 
-        .link {
-            text-align: center;
+        button:hover {
+            background: #6a11cb;
+        }
+
+        .error {
+            color: #ff4d4d;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .background-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="50" fill="%23ffffff10" /></svg>');
+            z-index: -1;
+            animation: moveBackground 10s linear infinite;
+        }
+
+        @keyframes moveBackground {
+            from { transform: translateY(0); }
+            to { transform: translateY(-50%); }
+        }
+
+        .links {
             margin-top: 15px;
+            font-size: 14px;
         }
 
-        .link a {
-            color: #00c6ff;
+        .links a {
+            color: #fff;
             text-decoration: none;
+            margin: 0 5px;
+            transition: color 0.3s ease;
+        }
+
+        .links a:hover {
+            color: #6a11cb;
         }
     </style>
 </head>
 <body>
-
-    <div class="form-container">
-        <h1>تسجيل الدخول</h1>
-        <form id="signUpForm">
-            <div class="input-group">
-                <label for="name">الاسم</label>
-                <input type="text" id="name" required>
-            </div>
-
-            <div class="input-group">
-                <label for="email">البريد الإلكتروني</label>
-                <input type="email" id="email" required>
-            </div>
-
-            <div class="input-group">
-                <label for="password">كلمة المرور</label>
-                <input type="password" id="password" required>
-                <span class="eye-icon" onclick="togglePasswordVisibility('password')">👁️</span>
-            </div>
-
-            <div class="input-group">
-                <label for="confirmPassword">تأكيد كلمة المرور</label>
-                <input type="password" id="confirmPassword" required>
-                <span class="eye-icon" onclick="togglePasswordVisibility('confirmPassword')">👁️</span>
-            </div>
-
-            <div class="input-group">
-                <label for="phone">رقم الهاتف</label>
-                <input type="tel" id="phone" required>
-            </div>
-
-            <div class="input-group">
-                <label for="address">العنوان</label>
-                <input type="text" id="address" required>
-            </div>
-
-            <button type="submit" class="btn">تسجيل الدخول</button>
+    <div class="background-pattern"></div>
+    <div class="container">
+        <h2>تسجيل الدخول</h2>
+        <form id="registrationForm">
+            <input type="text" id="name" placeholder="الاسم" required>
+            <input type="tel" id="phone" placeholder="رقم الهاتف" required>
+            <input type="email" id="email" placeholder="البريد الإلكتروني" required>
+            <input type="password" id="password" placeholder="كلمة المرور" required>
+            <input type="password" id="confirmPassword" placeholder="تأكيد كلمة المرور" required>
+            <input type="text" id="address" placeholder="العنوان" required>
+            <button type="submit">تسجيل</button>
         </form>
-
-        <div class="link">
-            <p>لديك حساب؟ <a href="third.html">تسجيل الدخول هنا</a></p>
+        <div id="errorMessage" class="error"></div>
+        <div class="links">
+            <a href="second.html">تسجيل الدخول</a> |
+            <a href="third.html">لديك حساب؟</a>
         </div>
-
-        <div class="error-message" id="errorMessage"></div>
     </div>
 
     <script>
-        // Toggle password visibility
-        function togglePasswordVisibility(id) {
-            const passwordField = document.getElementById(id);
-            const type = passwordField.type === "password" ? "text" : "password";
-            passwordField.type = type;
-        }
+        // التحقق من صحة البيانات
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
 
-        // Form validation
-        document.getElementById("signUpForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent form submission
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const address = document.getElementById('address').value;
 
-            const password = document.getElementById("password").value;
-            const confirmPassword = document.getElementById("confirmPassword").value;
-            const errorMessage = document.getElementById("errorMessage");
+            const errorMessage = document.getElementById('errorMessage');
 
             if (password !== confirmPassword) {
-                errorMessage.textContent = "كلمة المرور غير متطابقة!";
+                errorMessage.textContent = 'كلمة المرور غير متطابقة!';
+                errorMessage.style.display = 'block';
                 return;
             }
 
-            // Save data to localStorage (just as an example)
-            localStorage.setItem("name", document.getElementById("name").value);
-            localStorage.setItem("email", document.getElementById("email").value);
-            localStorage.setItem("phone", document.getElementById("phone").value);
-            localStorage.setItem("address", document.getElementById("address").value);
+            if (phone.length !== 11 || isNaN(phone)) {
+                errorMessage.textContent = 'رقم الهاتف غير صحيح!';
+                errorMessage.style.display = 'block';
+                return;
+            }
 
-            // Redirect to second.html
-            window.location.href = "second.html";
+            // إذا كانت البيانات صحيحة
+            errorMessage.style.display = 'none';
+            alert('تم التسجيل بنجاح!');
+            // هنا يمكنك إرسال البيانات إلى الخادم أو حفظها
         });
     </script>
 </body>
