@@ -156,8 +156,19 @@
 
             // إذا كانت البيانات صحيحة
             errorMessage.style.display = 'none';
-            alert('تم التسجيل بنجاح!');
-            // هنا يمكنك إرسال البيانات إلى الخادم أو حفظها
+
+            // حفظ البيانات في localStorage
+            const userData = {
+                name: name,
+                phone: phone,
+                email: email,
+                password: password,
+                address: address
+            };
+            localStorage.setItem('userData', JSON.stringify(userData));
+
+            // توجيه المستخدم إلى second.html
+            window.location.href = 'second.html';
         });
     </script>
 </body>
