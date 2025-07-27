@@ -1,175 +1,115 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تسجيل الدخول</title>
-    <style>
-        /* التنسيق العام */
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #6a11cb, #2575fc);
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .container {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            width: 300px;
-            text-align: center;
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h2 {
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 5px;
-            background: rgba(255, 255, 255, 0.8);
-            color: #333;
-        }
-
-        input:focus {
-            outline: none;
-            background: rgba(255, 255, 255, 1);
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background: #2575fc;
-            color: #fff;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-
-        button:hover {
-            background: #6a11cb;
-        }
-
-        .error {
-            color: #ff4d4d;
-            font-size: 14px;
-            margin-top: 5px;
-            display: none;
-        }
-
-        .background-pattern {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><circle cx="100" cy="100" r="50" fill="%23ffffff10" /></svg>');
-            z-index: -1;
-            animation: moveBackground 10s linear infinite;
-        }
-
-        @keyframes moveBackground {
-            from { transform: translateY(0); }
-            to { transform: translateY(-50%); }
-        }
-
-        .links {
-            margin-top: 15px;
-            font-size: 14px;
-        }
-
-        .links a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 5px;
-            transition: color 0.3s ease;
-        }
-
-        .links a:hover {
-            color: #6a11cb;
-        }
-    </style>
+  <!-- ... (ابقى على كل جزء head كما هو بدون تغيير) ... -->
 </head>
 <body>
-    <div class="background-pattern"></div>
-    <div class="container">
-        <h2>تسجيل الدخول</h2>
-        <form id="registrationForm">
-            <input type="text" id="name" placeholder="الاسم" required>
-            <input type="tel" id="phone" placeholder="رقم الهاتف" required>
-            <input type="email" id="email" placeholder="البريد الإلكتروني" required>
-            <input type="password" id="password" placeholder="كلمة المرور" required>
-            <input type="password" id="confirmPassword" placeholder="تأكيد كلمة المرور" required>
-            <input type="text" id="address" placeholder="العنوان" required>
-            <button type="submit">تسجيل</button>
-        </form>
-        <div id="errorMessage" class="error"></div>
-        <div class="links">
-            <a href="second.html">تسجيل الدخول</a> |
-            <a href="third.html">لديك حساب؟</a>
-        </div>
-    </div>
+  <!-- ... (ابقى على كل جزء body كما هو بدون تغيير حتى script) ... -->
 
-    <script>
-        // التحقق من صحة البيانات
-        document.getElementById('registrationForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+  <script>
+    // ... (ابقى على جميع الدوال الأخرى كما هي بدون تغيير حتى دالة showEpisodes) ...
 
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            const address = document.getElementById('address').value;
-
-            const errorMessage = document.getElementById('errorMessage');
-
-            if (password !== confirmPassword) {
-                errorMessage.textContent = 'كلمة المرور غير متطابقة!';
-                errorMessage.style.display = 'block';
-                return;
+    function showEpisodes(seriesId) {
+      const container = document.getElementById("episodesContainer");
+      container.innerHTML = "<p style='text-align:center;'>⏳ جاري تحميل الحلقات...</p>";
+      
+      // تحديد المسار الصحيح بناءً على نوع المسلسل (عربي/أجنبي)
+      let seriesPath = `series/arabe/${seriesId}`;
+      
+      // جلب بيانات المسلسل أولاً
+      db.ref(seriesPath).once("value").then(seriesSnapshot => {
+        const seriesData = seriesSnapshot.val();
+        
+        if (!seriesData) {
+          // إذا لم يتم العثور على المسلسل في المسار العربي، نبحث في المسار الأجنبي
+          seriesPath = `series/foreign/${seriesId}`;
+          return db.ref(seriesPath).once("value");
+        }
+        return { val: () => seriesData }; // إرجاع البيانات الموجودة
+      }).then(seriesSnapshot => {
+        const seriesData = seriesSnapshot.val();
+        
+        if (!seriesData) {
+          container.innerHTML = "<p style='text-align:center;'>🙁 لا توجد معلومات عن المسلسل.</p>";
+          return;
+        }
+        
+        // جلب الحلقات من المسار الصحيح
+        return db.ref(`${seriesPath}/episodes`).once("value").then(episodesSnapshot => {
+          const episodes = episodesSnapshot.val();
+          container.innerHTML = `
+            <div style="grid-column:1/-1; text-align:center; margin-bottom:20px;">
+              <h2 style="color:#e91e63; margin-bottom:10px;">${seriesData.title}</h2>
+              ${seriesData.image ? `<img src="${seriesData.image}" style="max-width:200px; border-radius:8px; margin:0 auto;">` : ''}
+            </div>`;
+          
+          if (!episodes) {
+            container.innerHTML += "<p style='text-align:center; grid-column:1/-1;'>🙁 لا توجد حلقات متاحة.</p>";
+            return;
+          }
+          
+          // عرض الحلقات
+          Object.values(episodes).forEach(ep => {
+            if (ep.video && ep.title) {
+              container.innerHTML += `
+                <div class="episode" onclick="openInPlayer('${ep.video}')">
+                  ${ep.image ? `<img src="${ep.image}" alt="${ep.title}">` : '<div style="height:180px;background:#333;display:flex;align-items:center;justify-content:center;">🎬</div>'}
+                  <p>${ep.title}</p>
+                </div>`;
             }
-
-            if (phone.length !== 11 || isNaN(phone)) {
-                errorMessage.textContent = 'رقم الهاتف غير صحيح!';
-                errorMessage.style.display = 'block';
-                return;
-            }
-
-            // إذا كانت البيانات صحيحة
-            errorMessage.style.display = 'none';
-
-            // حفظ البيانات في localStorage
-            const userData = {
-                name: name,
-                phone: phone,
-                email: email,
-                password: password,
-                address: address
-            };
-            localStorage.setItem('userData', JSON.stringify(userData));
-
-            // توجيه المستخدم إلى second.html
-            window.location.href = 'second.html';
+          });
+          
+          document.getElementById("seriesPopup").style.display = "flex";
         });
-    </script>
+      }).catch(error => {
+        console.error("Error loading episodes:", error);
+        container.innerHTML = "<p style='text-align:center;color:red;grid-column:1/-1;'>❌ حدث خطأ أثناء تحميل الحلقات</p>";
+      });
+    }
+
+    // ... (ابقى على بقية الدوال كما هي بدون تغيير) ...
+
+    function openInPlayer(url) {
+      const popup = document.getElementById("videoPopup");
+      const video = document.getElementById("videoPlayer");
+      const downloadBtn = document.getElementById("downloadBtn");
+      
+      if (url.includes('.m3u8')) {
+        if (Hls.isSupported()) {
+          const hls = new Hls();
+          hls.loadSource(url);
+          hls.attachMedia(video);
+          hls.on(Hls.Events.MANIFEST_PARSED, function() {
+            video.play();
+          });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+          video.src = url;
+          video.addEventListener('loadedmetadata', function() {
+            video.play();
+          });
+        }
+      } else {
+        video.src = url;
+      }
+      
+      downloadBtn.href = url;
+      downloadBtn.download = url.split('/').pop() || 'video.mp4';
+      popup.style.display = "flex";
+    }
+
+    function closeVideo() {
+      const video = document.getElementById("videoPlayer");
+      video.pause();
+      video.src = "";
+      document.getElementById("videoPopup").style.display = "none";
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.innerText = message;
+      toast.style.display = "block";
+      setTimeout(() => { toast.style.display = "none"; }, 3000);
+    }
+  </script>
 </body>
 </html>
